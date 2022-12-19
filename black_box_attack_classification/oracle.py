@@ -14,5 +14,5 @@ def oracle(model, data, device):
 				data = data[0].to(device)
 				output = model(data)
 				pred = output.data.max(1, keepdim=True)[1] # get the index of the max log-probability
-	print(pred)	
+	# print(pred)	
 	return pred

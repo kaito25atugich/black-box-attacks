@@ -37,9 +37,9 @@ def train(model, epochs, dataset, test_dataset, criterion, optimizer, device):
 
 
 def create_dataset(dataset, labels): 
-
-	for img in dataset:
-		print(len(img))
+	# 
+	# for img in dataset:
+	# 	print(len(img))
 
 	data = torch.stack([img[0] for img in dataset])
 	target = torch.stack([label[0] for label in labels])
@@ -67,7 +67,7 @@ def augment_dataset(model, dataset, LAMBDA, device):
 	new_dataset = torch.stack([data_point for data_point in new_dataset])
 	new_dataset = TorchUtils.TensorDataset(new_dataset)
 
-	new_dataset = TorchUtils.ConcatDataset([dataset, new_dataset])
+	# new_dataset = TorchUtils.ConcatDataset([dataset, new_dataset])
 	return new_dataset
 
 
@@ -84,6 +84,7 @@ def train_substitute(oracle_model, dataset, test_dataset, device, MAX_RHO, LAMBD
 
 	model = None
 	for rho in range(MAX_RHO):
+		print(len(dataset))
 
 		input_shape = list(dataset[0][0].shape)
 
