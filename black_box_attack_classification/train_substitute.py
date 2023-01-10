@@ -76,22 +76,14 @@ def train_substitute(oracle_model, dataset, test_dataset, device, MAX_RHO, LAMBD
 
 	oracle_model = oracle_model.to(device)
 
-	n_classes = 10
-	input_shape = list(dataset[0][0].shape)
-
-	conv = [input_shape[0]]
-	fc = []
-
 	model = None
 	for rho in range(MAX_RHO):
 		print(len(dataset))
 
-		input_shape = list(dataset[0][0].shape)
-
 		dummy_labels = oracle(oracle_model, dataset, device)
 		dummy_dataset = create_dataset(dataset, dummy_labels)
 
-		model = Classifier(input_shape, conv, fc, n_classes).to(device)
+		model = Classifier().to(device)
 		criterion = nn.CrossEntropyLoss().to(device)
 		optimizer = optim.Adagrad(model.parameters(), lr=0.01)
 
@@ -107,16 +99,8 @@ def train_substitute_not_scratch(oracle_model, dataset, test_dataset, device, MA
 
 	oracle_model = oracle_model.to(device)
 
-	n_classes = 10
-	input_shape = list(dataset[0][0].shape)
-
-	conv = [input_shape[0], 4, 8, 16, 32]
-	fc = []
-
-	model = Classifier(input_shape, conv, fc, n_classes).to(device)
+	model = Classifier().to(device)
 	for rho in range(MAX_RHO):
-
-		input_shape = list(dataset[0][0].shape)
 
 		dummy_labels = oracle(oracle_model, dataset, device)
 		dummy_dataset = create_dataset(dataset, dummy_labels)

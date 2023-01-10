@@ -43,7 +43,7 @@ def save_tiff_image(img, name):
 	if folder not in os.listdir():
 		os.mkdir("adv_samples")
 
-	img = img.detach().numpy()
+	img = img.detach().cpu().numpy()
 	TIFF.imwrite(folder+"/"+name, img)
 
 	# trans = torchvision.transforms.ToPILImage()
