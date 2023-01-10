@@ -10,17 +10,17 @@ We separate the bounding boxes of object detected as new images, create adversar
 
 ## Requirements
 ```
-python >=3.5
+python >=3.5 -> python == 3.10
 numpy
 torch
 torchvision
 matplotlib
-tensorflow
-tensorboard
-terminaltables
+tensorflow -> delete
+tensorboard -> delete
+terminaltables -> delete
 pillow
 tqdm
-libtiff
+libtiff -> changed to tifffile
 ```
 
 ## Setup Instructions
