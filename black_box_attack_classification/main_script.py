@@ -91,16 +91,17 @@ if args['adv']:
 	model_name = input("Substitute Model Name: ")
 	target = 1 # int(input("Directed Label to misclassify: "))
 	num_samples = 20
-	eps = 0.3
+	eps = 0.2
 
 	model = torch.load("saved_models/"+model_name).to(device)
 	data_loader = torch.utils.data.DataLoader(dataset['eval'], batch_size=1, shuffle=True)
 	counter = 0
 	samples = torch.zeros([num_samples]+list(dataset['eval'][0][0].shape))
 	for data, label in data_loader:
-		if label == target:
+		if label != target:
 			continue
 		samples[counter] = fast_gradient_method(model, data.to(device), eps, np.inf) 
+		# samples[counter] = projected_gradient_descent(model, data.to(device), eps, eps_iter=0.01, nb_iter=40, norm=np.inf) 
 		counter += 1
 		if counter == num_samples:
 			break
@@ -112,8 +113,8 @@ if args['adv']:
 if args['test']:
 	model_name = input("Test Model Name: ")
 	model = torch.load("saved_models/"+model_name)
-	# data = get_Adv_Dataset()
-	data = dataset['eval']
+	data = get_Adv_Dataset()
+	# data = dataset['eval']
 	print(data[0][0].shape)
 	
 	print("For", model_name[:-3], "model: ")
