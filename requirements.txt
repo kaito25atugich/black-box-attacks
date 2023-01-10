@@ -1,7 +1,4 @@
-numpy
 torch
 torchvision
-matplotlib
-pillow
-tqdm
 tifffile
+cleverhans
